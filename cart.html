@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <style>
+        #show2 {
+            display: grid;
+            grid-template-columns: repeat(3, 30%);
+            gap: 5%;
+            margin-left: 30px;
+        }
+    
+        img {
+            width: 60%;
+            height: 250px;
+        }
+        h1{
+            text-align: center;
+        }
+    
+        p {
+            margin-left: auto;
+        }
+    
+        p {
+            font-size: 22px;
+        }
+    </style>
+    </head>
+    <body>
+        <h1>Cart</h1>
+        <input type="text" id="promo" placeholder="Enter Promo Code">
+        <input type="submit" id="promoButt">
+        <div id="total"></div>
+        <button onclick="checkOut()">Check Out</button>
+        <div id="show2"></div>
+    </body>
+</html>
+<script>
+      let div_All = document.getElementById("show2");
+
+      function showProducts1(d){
+
+          const data = d;
+
+          //div_All.innerHTML = null;
+
+          data.forEach(function (el) {
+              let div = document.createElement("div");
+
+              let brand = document.createElement("p");
+
+              let price = document.createElement("p");
+
+              let img = document.createElement("img");
+
+              brand.textContent = el.brand;
+              price.innerHTML = el.price;
+              img.src = el.img;
+
+              div.append(brand, price, img,);
+              div_All.append(div);
+          });
+      }
+
+       showProducts1(JSON.parse(localStorage.getItem("cart")));
+
+       function discount(){
+           let data = JSON.parse(localStorage.getItem("cart"));
+
+           let div_total = document.getElementById("total");
+
+           let totalPrice = document.getElementById("totalPrice");
+
+           let tpText = document.createElement("h3");
+           tpText.textContent = "Total Price";
+
+           let totalP = document.createElement("h2");
+
+           let sum = 0;
+           for(let i=0;i<data.length;i++){
+               sum += data[i].price;
+           }
+
+           let promoButt = document.getElementById("promoButt");
+    
+           promoButt.addEventListener("click",function(){
+               let pomoCode = document.getElementById("promo").value;
+               if(pomoCode == "masai30"){
+                   sum = 0.3 * sum;
+                   totalP.textContent = sum;
+               }
+           });
+
+           totalP.textContent = sum;
+           div_total.append(tpText, totalP);
+       }
+
+       discount();
+
+       function checkOut(){
+           window.location.href = "checkOut.html";
+       }
+</script>
