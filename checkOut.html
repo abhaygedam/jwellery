@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form>
+            <h1>Fill Address Details</h1>
+            <input type="text" id="address" placeholder="Enter full Address with Pin Code">
+            <input type="number" id="num" placeholder="Enter alternate mobile number">
+            <button onclick="addAddress(event)">Submit</button>
+        </form>
+            
+    </body>
+</html>
+<script>
+     
+
+     function addAddress(e){
+          e.preventDefault();
+              
+          setTimeout(function(){
+              alert("Your Order is Place, Thanks for Shopping");
+          },3000);
+     }
+</script>
